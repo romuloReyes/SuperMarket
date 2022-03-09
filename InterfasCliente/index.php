@@ -2,7 +2,7 @@
     include("../conexion.php");
     $con=conectar();
 
-    $sql="SELECT *  FROM productos";
+    $sql="SELECT *  FROM productos2";
     $query=mysqli_query($con,$sql);
 ?>
 <!DOCTYPE html>
@@ -74,55 +74,25 @@
 
     <div id="lista-productos" class="container">
         <h1 id="encabezado" class="encabezado">Nuestros Productos</h3>
+
         <div class="row">
+            <?php while($producto=mysqli_fetch_assoc($query)):?>
             <div class="four columns">
                 <div class="card">
-                    <img src="img/tomate.jpg" class="imagen-curso u-full-width">
+                    <img src="img/<?php echo $producto['imagen']?>" class="imagen-curso u-full-width">
                     <div class="info-card">
-                        <h4>Tomate</h4>
-                        <p>tomate bola</p>
-                        <p class="precio">$28  <span class="u-pull-right ">$22.50</span></p>
+                        <h4><?php echo $producto['nombre']?></h4>
+                        <p><?php echo $producto['descripcion']?></p>
+                        <p class="precio"><?php echo $producto['stock']?>  <span class="u-pull-right "><?php echo $producto['precio']?></span></p>
                         <a href="#" class="u-full-width button-primary button input agregar-carrito" data-id="1">Agregar Al Carrito</a>
                     </div>
                 </div> <!--.card-->
             </div>
-            <div class="four columns">
-                <div class="card">
-                    <img src="img/naranja.jpg" class="imagen-curso u-full-width">
-                    <div class="info-card">
-                        <h4>Naranja</h4>
-                        <p>naranja de la costa de hermosillo</p>
-                        <p class="precio">$25  <span class="u-pull-right ">$20</span></p>
-                        <a href="#" class="u-full-width button-primary button input agregar-carrito" data-id="2">Agregar Al Carrito</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="four columns">
-                <div class="card">
-                    <img src="img/melon2.jpg" class="imagen-curso u-full-width">
-                    <div class="info-card">
-                        <h4>Melon</h4>
-                        <p>Oferta especial</p>
-                        <p class="precio">$35  <span class="u-pull-right ">$18.5</span></p>
-                        <a href="#" class="u-full-width button-primary button input agregar-carrito" data-id="2">Agregar Al Carrito</a>
-                    </div>
-                </div>
-            </div>
+            <?php endwhile; ?>
 
         </div> <!--.row-->
-        <div class="row">
-            <div class="four columns">
-                <div class="card">
-                    <img src="img/aguacate.jpg" class="imagen-curso u-full-width">
-                    <div class="info-card">
-                        <h4>aguacate</h4>
-                        <p>Oferta especial</p>
-                        <p class="precio">$60  <span class="u-pull-right ">$28.5</span></p>
-                        <a href="#" class="u-full-width button-primary button input agregar-carrito" data-id="4">Agregar Al Carrito</a>
-                    </div>
-                </div> <!--.card-->
-            </div>
+
+        
     </div>  
 
     <footer id="footer" class="footer">
@@ -146,3 +116,8 @@
 
 </body>
 </html>
+
+<?php
+    //cerrar la conexion
+    mysqli_close($con)
+?>

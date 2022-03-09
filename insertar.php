@@ -57,6 +57,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     // var_dump($errores);
     // echo "</pre>";
     // exit;
+
     /** REVISAR QUE EL ARREGLO DE ERRORES ESTE VACIO**/
     if(empty($errores)){
         /** SUBIDA DE ARCHIVOS **/
@@ -64,8 +65,10 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         if(!is_dir($carpetaImagenes)){
             mkdir($carpetaImagenes);
         }
-        // /*SUBIR LA IMAGEN */
-        move_uploaded_file($imagen['tmp_name'],$carpetaImagenes . "/archivo.jpg");
+        /*GENERAR UN NOMBRE DE IMAGEN UNICO */
+        $nombreImagen= md5( uniqid( rand(), true ) );
+        /*SUBIR LA IMAGEN */
+        move_uploaded_file($imagen['tmp_name'],$carpetaImagenes . "/" . $nombreImagen . ".jpg");
 
         $sql="INSERT INTO productos2 VALUES ('$id','$nombre','$precio','$stock','$descripcion','$imagenNombre')";
         $query=mysqli_query($con,$sql);
