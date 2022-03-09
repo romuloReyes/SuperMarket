@@ -29,9 +29,10 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     $precio=$_POST['precio'];
     $stock=$_POST['stock'];
     $descripcion=$_POST['descripcion'];
-    $imagen=$_POST['imagen'];
+    // $imagen=$_POST['imagen'];
 
-    $imagenfile=$_FILES['imagen'];
+    $imagen=$_FILES['imagen'];
+    $imagenNombre=$imagen['name'];
     
 
     if(!$id){
@@ -64,9 +65,9 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
             mkdir($carpetaImagenes);
         }
         // /*SUBIR LA IMAGEN */
-        move_uploaded_file($imagenfile['tmp_name'],$carpetaImagenes . "/archivo.jpg");
+        move_uploaded_file($imagen['tmp_name'],$carpetaImagenes . "/archivo.jpg");
 
-        $sql="INSERT INTO productos2 VALUES ('$id','$nombre','$precio','$stock','$descripcion','$imagen')";
+        $sql="INSERT INTO productos2 VALUES ('$id','$nombre','$precio','$stock','$descripcion','$imagenNombre')";
         $query=mysqli_query($con,$sql);
 
         if($query){

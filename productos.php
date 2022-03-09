@@ -37,7 +37,7 @@
                     
                     <div class="col-md-3">
                         <h1>Ingrese Producto</h1>
-                            <form action="insertar.php" method="POST" >
+                            <form action="insertar.php" method="POST" enctype="multipart/form-data">
 
                                 <input type="text" class="form-control mb-3" name="id" placeholder="ID">
                                 <input type="text" class="form-control mb-3" name="nombre" placeholder="Nombre">
